@@ -21,9 +21,10 @@ Total Run Time: 00:00:00.7679507
     1. `Add:` has the position of where you will move the pice to
     2. One `Remove:` has the position of the piece you want to move
     3. The other `Remove:` has the position of the piece you are capturing
-5.   Move the piece from the `Remove:` postion to the `Add:` position
+5. Move the piece from the `Remove:` postion to the `Add:` position
       1. You can turn on perspective mode and look strat down to acuratly find the positions on the board
       2. Match the text after `"type":` with the `Add:` to know wich `Remove` you should be moving the piece from
+6. Press any key to close the application
 ## Things that don't work (yet)
 - It doesn't know that pawns can premote
 - It assumes that it is always playing Limit 7
