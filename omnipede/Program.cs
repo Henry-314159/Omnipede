@@ -12,7 +12,7 @@ class Program
     static void Main(string[] args)
     {
         var watchGlobal = System.Diagnostics.Stopwatch.StartNew();
-        Dictionary<string, string> config;
+        Dictionary<string, string>? config;
         try
         {
             config = JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(@".\omnipede-config.json"));
@@ -36,11 +36,42 @@ class Program
         }
         int depth;
         string filePath;
+        bool errorDetection;
+        config ??= new();
 
         ConfigTry:
         try
         {
-            depth = int.Parse(config["depth"]);
+            try
+            {
+                depth = int.Parse(config["depth"]);
+            }
+            catch (FormatException)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("FormatException When Loading Depth Config, Reseting Depth Config");
+
+                config["depth"] = "2";
+                File.WriteAllText(@".\omnipede-config.json", JsonSerializer.Serialize<Dictionary<string, string>>(config));
+
+                goto ConfigTry;
+            }
+            try
+            {
+                errorDetection = bool.Parse(config["errorDetection"]);
+            }
+            catch (FormatException)
+            {
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("FormatException When Loading Config, Reseting Depth Config");
+
+                config["errorDetection"] = "true";
+                File.WriteAllText(@".\omnipede-config.json", JsonSerializer.Serialize<Dictionary<string, string>>(config));
+
+                goto ConfigTry;
+            }
+            
+            
             filePath = (string)config["filePath"];
         }
         catch (KeyNotFoundException)
@@ -50,17 +81,8 @@ class Program
 
             if (!config.ContainsKey("depth")) {config.Add("depth", "2"); }
             if (!config.ContainsKey("filePath")) {config.Add("filePath", @".\omnipede-input.json");}
+            if (!config.ContainsKey("errorDetection")) {config.Add("errorDetection", "true"); }
 
-            File.WriteAllText(@".\omnipede-config.json", JsonSerializer.Serialize<Dictionary<string, string>>(config));
-
-            goto ConfigTry;
-        }
-        catch (FormatException)
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("FormatException When Loading Config, Reseting Depth Config");
-
-            config["depth"] = "2";
             File.WriteAllText(@".\omnipede-config.json", JsonSerializer.Serialize<Dictionary<string, string>>(config));
 
             goto ConfigTry;
@@ -72,6 +94,7 @@ class Program
         Console.WriteLine("Config Loaded:");
         Console.WriteLine("     Depth: "+depth);
         Console.WriteLine("     File Path: "+filePath);
+        Console.WriteLine("     Error Detection: "+errorDetection);
 
         Position position;
 
@@ -100,7 +123,7 @@ class Program
         Console.WriteLine("Position Decoded");
         Console.WriteLine("Starting Search For \"Best\" Move");
 
-        Tuple<Position, int> outputTuple = Engine.Normal(position, depth, -2147483648, 2147483647);
+        Tuple<Position, int> outputTuple = Engine.Normal(position, depth, -2147483648, 2147483647, errorDetection);
 
 
         Position goodPosition = outputTuple.Item1;
@@ -116,7 +139,7 @@ class Program
 
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Total Run Time: "+watchGlobal.Elapsed);
-        Console.ReadKey();
+        Console.Read();
     }
 
     static void PrintPositionDifrences(Position position, Position goodPosition)

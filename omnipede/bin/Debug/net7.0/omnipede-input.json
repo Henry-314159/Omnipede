@@ -1,115 +1,493 @@
 {
-    "startingPosition": {
-      "5,1": "kingsW",
-      "5,8": "kingsB",
-      "4,1": "queensW",
-      "4,8": "queensB",
-      "2,1": "knightsW",
-      "7,1": "knightsW",
-      "2,8": "knightsB",
-      "7,8": "knightsB",
-      "3,1": "bishopsW",
-      "6,1": "bishopsW",
-      "3,8": "bishopsB",
-      "6,8": "bishopsB",
-      "1,1": "rooksW",
-      "8,1": "rooksW",
-      "1,8": "rooksB",
-      "8,8": "rooksB",
-      "1,2": "pawnsW",
-      "2,2": "pawnsW",
-      "3,2": "pawnsW",
-      "4,2": "pawnsW",
-      "5,2": "pawnsW",
-      "6,2": "pawnsW",
-      "7,2": "pawnsW",
-      "8,2": "pawnsW",
-      "1,7": "pawnsB",
-      "2,7": "pawnsB",
-      "3,7": "pawnsB",
-      "4,7": "pawnsB",
-      "5,7": "pawnsB",
-      "6,7": "pawnsB",
-      "7,7": "pawnsB",
-      "8,7": "pawnsB"
-    },
-    "patterns": [],
-    "promotionRanks": [
-      1,
-      8
+  "startingPosition": {
+    "5,1": "kingsW",
+    "5,8": "kingsB",
+    "4,1": "queensW",
+    "4,8": "queensB",
+    "2,1": "knightsW",
+    "7,1": "knightsW",
+    "2,8": "knightsB",
+    "7,8": "knightsB",
+    "3,1": "bishopsW",
+    "6,1": "bishopsW",
+    "3,8": "bishopsB",
+    "6,8": "bishopsB",
+    "1,1": "rooksW",
+    "8,1": "rooksW",
+    "1,8": "rooksB",
+    "8,8": "rooksB",
+    "1,2": "pawnsW",
+    "2,2": "pawnsW",
+    "3,2": "pawnsW",
+    "4,2": "pawnsW",
+    "5,2": "pawnsW",
+    "6,2": "pawnsW",
+    "7,2": "pawnsW",
+    "8,2": "pawnsW",
+    "1,7": "pawnsB",
+    "2,7": "pawnsB",
+    "3,7": "pawnsB",
+    "4,7": "pawnsB",
+    "5,7": "pawnsB",
+    "6,7": "pawnsB",
+    "7,7": "pawnsB",
+    "8,7": "pawnsB"
+  },
+  "patterns": [],
+  "promotionRanks": [
+    1,
+    8
+  ],
+  "moves": [
+    [
+      {
+        "type": "rooksW",
+        "startCoords": [
+          8,
+          1
+        ],
+        "endCoords": [
+          15,
+          1
+        ]
+      },
+      {
+        "type": "pawnsB",
+        "startCoords": [
+          8,
+          7
+        ],
+        "endCoords": [
+          8,
+          5
+        ]
+      }
     ],
-    "moves": [
-      [
-        {
-          "type": "pawnsW",
-          "startCoords": [
-            5,
-            2
-          ],
-          "endCoords": [
-            5,
-            4
-          ]
-        },
-        {
-          "type": "pawnsB",
-          "startCoords": [
-            5,
-            7
-          ],
-          "endCoords": [
-            5,
-            5
-          ]
-        }
-      ],
-      [
-        {
-          "type": "pawnsW",
-          "startCoords": [
-            4,
-            2
-          ],
-          "endCoords": [
-            4,
-            4
-          ]
-        },
-        {
-          "type": "pawnsB",
-          "startCoords": [
-            4,
-            7
-          ],
-          "endCoords": [
-            4,
-            5
-          ]
-        }
-      ],
-      [
-        {
-          "type": "queensW",
-          "startCoords": [
-            4,
-            1
-          ],
-          "endCoords": [
-            8,
-            5
-          ]
-        },
-        {
-          "type": "pawnsB",
-          "startCoords": [
-            7,
-            7
-          ],
-          "endCoords": [
-            7,
-            6
-          ]
-        }
-      ]
+    [
+      {
+        "type": "rooksW",
+        "startCoords": [
+          15,
+          1
+        ],
+        "endCoords": [
+          15,
+          5
+        ]
+      },
+      {
+        "type": "pawnsB",
+        "startCoords": [
+          7,
+          7
+        ],
+        "endCoords": [
+          7,
+          5
+        ]
+      }
+    ],
+    [
+      {
+        "type": "rooksW",
+        "startCoords": [
+          15,
+          5
+        ],
+        "endCoords": [
+          15,
+          9
+        ]
+      },
+      {
+        "type": "bishopsB",
+        "startCoords": [
+          6,
+          8
+        ],
+        "endCoords": [
+          10,
+          4
+        ]
+      }
+    ],
+    [
+      {
+        "type": "rooksW",
+        "startCoords": [
+          15,
+          9
+        ],
+        "endCoords": [
+          22,
+          9
+        ]
+      },
+      {
+        "type": "pawnsB",
+        "startCoords": [
+          6,
+          7
+        ],
+        "endCoords": [
+          6,
+          5
+        ]
+      }
+    ],
+    [
+      {
+        "type": "bishopsW",
+        "startCoords": [
+          6,
+          1
+        ],
+        "endCoords": [
+          7,
+          0
+        ]
+      },
+      {
+        "type": "pawnsB",
+        "startCoords": [
+          5,
+          7
+        ],
+        "endCoords": [
+          5,
+          5
+        ]
+      }
+    ],
+    [
+      {
+        "type": "bishopsW",
+        "startCoords": [
+          7,
+          0
+        ],
+        "endCoords": [
+          11,
+          4
+        ]
+      },
+      {
+        "type": "pawnsB",
+        "startCoords": [
+          4,
+          7
+        ],
+        "endCoords": [
+          4,
+          5
+        ]
+      }
+    ],
+    [
+      {
+        "type": "rooksW",
+        "startCoords": [
+          22,
+          9
+        ],
+        "endCoords": [
+          22,
+          7
+        ]
+      },
+      {
+        "type": "pawnsB",
+        "startCoords": [
+          3,
+          7
+        ],
+        "endCoords": [
+          3,
+          5
+        ]
+      }
+    ],
+    [
+      {
+        "type": "rooksW",
+        "startCoords": [
+          1,
+          1
+        ],
+        "endCoords": [
+          -6,
+          1
+        ]
+      },
+      {
+        "type": "pawnsB",
+        "startCoords": [
+          2,
+          7
+        ],
+        "endCoords": [
+          2,
+          5
+        ]
+      }
+    ],
+    [
+      {
+        "type": "rooksW",
+        "startCoords": [
+          -6,
+          1
+        ],
+        "endCoords": [
+          -6,
+          6
+        ]
+      },
+      {
+        "type": "queensB",
+        "startCoords": [
+          4,
+          8
+        ],
+        "endCoords": [
+          -3,
+          1
+        ]
+      }
+    ],
+    [
+      {
+        "type": "rooksW",
+        "startCoords": [
+          22,
+          7
+        ],
+        "endCoords": [
+          15,
+          7
+        ]
+      },
+      {
+        "type": "queensB",
+        "startCoords": [
+          -3,
+          1
+        ],
+        "endCoords": [
+          2,
+          1
+        ],
+        "captured": "knightsW"
+      }
+    ],
+    [
+      {
+        "type": "rooksW",
+        "startCoords": [
+          15,
+          7
+        ],
+        "endCoords": [
+          10,
+          7
+        ]
+      },
+      {
+        "type": "bishopsB",
+        "startCoords": [
+          10,
+          4
+        ],
+        "endCoords": [
+          8,
+          2
+        ],
+        "captured": "pawnsW"
+      }
+    ],
+    [
+      {
+        "type": "rooksW",
+        "startCoords": [
+          -6,
+          6
+        ],
+        "endCoords": [
+          -6,
+          9
+        ]
+      },
+      {
+        "type": "knightsB",
+        "startCoords": [
+          7,
+          8
+        ],
+        "endCoords": [
+          5,
+          9
+        ]
+      }
+    ],
+    [
+      {
+        "type": "rooksW",
+        "startCoords": [
+          -6,
+          9
+        ],
+        "endCoords": [
+          0,
+          9
+        ]
+      },
+      {
+        "type": "knightsB",
+        "startCoords": [
+          2,
+          8
+        ],
+        "endCoords": [
+          0,
+          9
+        ],
+        "captured": "rooksW"
+      }
+    ],
+    [
+      {
+        "type": "kingsW",
+        "startCoords": [
+          5,
+          1
+        ],
+        "endCoords": [
+          4,
+          0
+        ]
+      },
+      {
+        "type": "pawnsB",
+        "startCoords": [
+          1,
+          7
+        ],
+        "endCoords": [
+          1,
+          5
+        ]
+      }
+    ],
+    [
+      {
+        "type": "pawnsW",
+        "startCoords": [
+          5,
+          2
+        ],
+        "endCoords": [
+          5,
+          4
+        ]
+      },
+      {
+        "type": "pawnsB",
+        "startCoords": [
+          6,
+          5
+        ],
+        "endCoords": [
+          5,
+          4
+        ],
+        "captured": "pawnsW"
+      }
+    ],
+    [
+      {
+        "type": "bishopsW",
+        "startCoords": [
+          11,
+          4
+        ],
+        "endCoords": [
+          10,
+          3
+        ]
+      },
+      {
+        "type": "bishopsB",
+        "startCoords": [
+          3,
+          8
+        ],
+        "endCoords": [
+          7,
+          4
+        ]
+      }
+    ],
+    [
+      {
+        "type": "queensW",
+        "startCoords": [
+          4,
+          1
+        ],
+        "endCoords": [
+          9,
+          -4
+        ]
+      },
+      {
+        "type": "queensB",
+        "startCoords": [
+          2,
+          1
+        ],
+        "endCoords": [
+          3,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "type": "kingsW",
+        "startCoords": [
+          4,
+          0
+        ],
+        "endCoords": [
+          5,
+          1
+        ]
+      },
+      {
+        "type": "queensB",
+        "startCoords": [
+          3,
+          0
+        ],
+        "endCoords": [
+          3,
+          1
+        ],
+        "captured": "bishopsW"
+      }
+    ],
+    [
+      {
+        "type": "kingsW",
+        "startCoords": [
+          5,
+          1
+        ],
+        "endCoords": [
+          5,
+          0
+        ]
+      }
     ]
-  }
+  ]
+}

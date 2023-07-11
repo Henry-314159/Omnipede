@@ -6,7 +6,7 @@ namespace omnipede;
 
 public class Engine
 {
-    public static Tuple<Position, int> Normal(Position startingPosition, int depth, int alpha, int beta)
+    public static Tuple<Position, int> Normal(Position startingPosition, int depth, int alpha, int beta, bool errorDetection)
     {
         List<Position> testPositionList;
         Position bestPosition;
@@ -20,14 +20,10 @@ public class Engine
         {
             return new Tuple<Position, int>(startingPosition, PositionEvaluator.PointBased(startingPosition));
         }
-        //else
-        //{
-        //    Console.WriteLine("Depth: "+depth);
-        //    Console.WriteLine("Engine Run Time: "+watch4.Elapsed);
-        //    Console.WriteLine();
-        //}
 
-        testPositionList = MoveLister.ListMoves(startingPosition);
+            //Console.WriteLine("Depth: "+depth);
+
+        testPositionList = MoveLister.ListMoves(startingPosition, errorDetection);
         bestPosition = testPositionList[0];
   
         
@@ -40,24 +36,24 @@ public class Engine
 
                 if (PositionEvaluator.KingsExist(testPosition))
                 {
-                    testPositionValue = Engine.Normal(testPosition, depth-1, alpha, beta).Item2;
+                  testPositionValue = Engine.Normal(testPosition, depth-1, alpha, beta, errorDetection).Item2;
                 }
                 else
                 {
                     testPositionValue = PositionEvaluator.PointBased(testPosition);
                 }
                 
-                alpha = Math.Max(alpha, testPositionValue);
+                alpha = Math.Max(alpha, testPositionValue);                
+
+                if (testPositionValue >= beta)
+                {
+                    return new Tuple<Position, int>(testPosition, testPositionValue);
+                }
 
                 if (testPositionValue > bestPositionValue)
                 {
                     bestPosition = testPosition;
                     bestPositionValue = testPositionValue;
-                }
-
-                if (beta <= alpha)
-                {
-                    return new Tuple<Position, int>(bestPosition, bestPositionValue);
                 }
             }
         }
@@ -70,24 +66,24 @@ public class Engine
 
                 if (PositionEvaluator.KingsExist(testPosition))
                 {
-                    testPositionValue = Engine.Normal(testPosition, depth-1, alpha, beta).Item2;
+                  testPositionValue = Engine.Normal(testPosition, depth-1, alpha, beta, errorDetection).Item2;
                 }
                 else
                 {
                     testPositionValue = PositionEvaluator.PointBased(testPosition);
                 }
 
-                beta = Math.Min(beta, testPositionValue);
+                beta = Math.Min(beta, testPositionValue);     
+
+                if (testPositionValue <= alpha)
+                {
+                    return new Tuple<Position, int>(testPosition, testPositionValue);
+                }
 
                 if (testPositionValue < bestPositionValue)
                 {
                     bestPosition = testPosition;
                     bestPositionValue = testPositionValue;
-                }
-
-                if (beta <= alpha)
-                {
-                    return new Tuple<Position, int>(bestPosition, bestPositionValue);
                 }
             }
         }

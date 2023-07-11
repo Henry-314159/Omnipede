@@ -3,24 +3,30 @@ using System.Text.Json;
 
 
 public class MoveLister{
-    public static List<Position> ListMoves(Position position){
+    public static List<Position> ListMoves(Position position, bool errorDetection){
 
         List<Position> output = new();
-        List<Position> testPositionList = new();
-        Position? testPosition = null;
-        Position positionBackup = position.Clone();
+        List<Position> testPositionList;
+        Position? testPosition;
+        Position positionBackup;
+        positionBackup = position;
+        if (errorDetection)
+        {
+            positionBackup = position.Clone();
+        }
 
         if (position.whitesTurn){
             for (int i = 0; i < position.pieces.Count; i++)
             {
-                //if (JsonSerializer.Serialize(positionBackup) != JsonSerializer.Serialize(position))
-                //{
-                //    Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                //    Console.WriteLine(JsonSerializer.Serialize(positionBackup, new JsonSerializerOptions { WriteIndented = true }));
-                //    Console.WriteLine("-----");
-                //    Console.WriteLine(JsonSerializer.Serialize(position, new JsonSerializerOptions { WriteIndented = true }));
-                //    return output;
-                //}
+                if (errorDetection && JsonSerializer.Serialize(positionBackup) != JsonSerializer.Serialize(position))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    Console.WriteLine(JsonSerializer.Serialize(positionBackup, new JsonSerializerOptions { WriteIndented = true }));
+                    Console.WriteLine("-----");
+                    Console.WriteLine(JsonSerializer.Serialize(position, new JsonSerializerOptions { WriteIndented = true }));
+                    return output;
+                }
                 if (position.pieces[i].type.Last() != 'W')
                 {
                     
@@ -301,14 +307,15 @@ public class MoveLister{
         {
             for (int i = 0; i < position.pieces.Count; i++)
             {
-                //if (JsonSerializer.Serialize(positionBackup) != JsonSerializer.Serialize(position))
-                //{
-                //    Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                //    Console.WriteLine(JsonSerializer.Serialize(positionBackup, new JsonSerializerOptions { WriteIndented = true }));
-                //    Console.WriteLine("-----");
-                //    Console.WriteLine(JsonSerializer.Serialize(position, new JsonSerializerOptions { WriteIndented = true }));
-                //    return output;
-                //}
+                if (errorDetection && JsonSerializer.Serialize(positionBackup) != JsonSerializer.Serialize(position))
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                    Console.WriteLine(JsonSerializer.Serialize(positionBackup, new JsonSerializerOptions { WriteIndented = true }));
+                    Console.WriteLine("-----");
+                    Console.WriteLine(JsonSerializer.Serialize(position, new JsonSerializerOptions { WriteIndented = true }));
+                    return output;
+                }
                 if (position.pieces[i].type.Last() != 'B')
                 {
                     
@@ -331,12 +338,12 @@ public class MoveLister{
                         }
                     }
                     //Capture
-                    testPosition = OneSpaceMovementWithCollisonDetection(position.Clone(), 1, -1, 'B', i, out collision);
+                    testPosition = OneSpaceMovementWithCollisonDetection(position, 1, -1, 'B', i, out collision);
                     if (collision)
                     {
                         if (testPosition!=null) {output.Add(testPosition);}
                     }
-                    testPosition = OneSpaceMovementWithCollisonDetection(position.Clone(), -1, -1, 'B', i, out collision);
+                    testPosition = OneSpaceMovementWithCollisonDetection(position, -1, -1, 'B', i, out collision);
                     if (collision)
                     {
                         if (testPosition!=null) {output.Add(testPosition);}
@@ -591,7 +598,7 @@ public class MoveLister{
                 if (position.pieces[j].type.Last() != friendEnd)
                 {
                     position1.pieces.RemoveAt(j);
-                    position1.pieces.Insert(j, position.Clone().pieces[i]);
+                    position1.pieces.Insert(j, position.pieces[i].Clone());
                     position1.pieces[j].xCoord = position.pieces[i].xCoord + xOffset;
                     position1.pieces[j].yCoord = position.pieces[i].yCoord + yOffset;
                     position1.pieces[j].hasMoved = true;
@@ -626,7 +633,7 @@ public class MoveLister{
                 if (position.pieces[j].type.Last() != friendEnd)
                 {
                     position1.pieces.RemoveAt(j);
-                    position1.pieces.Insert(j, position.Clone().pieces[i]);
+                    position1.pieces.Insert(j, position.pieces[i].Clone());
                     position1.pieces[j].xCoord = position.pieces[i].xCoord + xOffset;
                     position1.pieces[j].yCoord = position.pieces[i].yCoord + yOffset;
                     position1.pieces[j].hasMoved = true;
@@ -661,9 +668,6 @@ public class MoveLister{
         {
             if (position.enPassentable.xCoord == position.pieces[i].xCoord + xOffset && position.enPassentable.yCoord == position.pieces[i].yCoord)
             {
-                //Console.WriteLine(JsonSerializer.Serialize(position, new JsonSerializerOptions { WriteIndented = true }));
-                //Console.WriteLine("---------------------------------------------------------------------------------------");
-                //Console.WriteLine(JsonSerializer.Serialize(position1, new JsonSerializerOptions { WriteIndented = true }));
                 position1.pieces.RemoveAt(0);
                 position1.pieces.Insert(0, position1.pieces[i-1]);
                 position1.pieces[0].xCoord = position1.pieces[0].xCoord + xOffset;
@@ -689,7 +693,10 @@ public class MoveLister{
         {
             testPosition = OneSpaceMovementWithCollisonDetection(position, xOffset*(k+1), yOffset*(k+1), friendEnd, i, out bool collision);
             
-            if (testPosition!=null) {outputPosition.Add(testPosition);}
+            if (testPosition!=null) 
+            {
+                outputPosition.Add(testPosition);
+            }
             if (collision) {break;}
         }
         return outputPosition;
