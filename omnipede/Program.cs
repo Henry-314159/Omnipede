@@ -121,16 +121,21 @@ class Program
         
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Position Decoded");
-        Console.WriteLine("Starting Search For \"Best\" Move");
+        Console.WriteLine("Starting Search For \"Best\" Move:");
 
-        Tuple<Position, int> outputTuple = Engine.Normal(position, depth, -2147483648, 2147483647, errorDetection);
+        int movesSearched = 0;
+        Tuple<Position, int> outputTuple = Engine.Normal(position, depth, -2147483648, 2147483647, errorDetection, ref movesSearched);
 
 
         Position goodPosition = outputTuple.Item1;
 
         Console.ForegroundColor = ConsoleColor.White;
+        
+        Console.WriteLine("     Total Moves Searched: "+movesSearched);
         Console.WriteLine("Move Found:");
         Console.WriteLine("     Position Value: "+outputTuple.Item2);
+        
+
         
 
         PrintPositionDifrences(position, goodPosition);

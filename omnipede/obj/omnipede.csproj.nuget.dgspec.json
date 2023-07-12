@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Henry\\Desktop\\omnipede\\omnipede.csproj": {}
+    "C:\\Users\\Henry\\Desktop\\omnipede\\omnipede.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Henry\\Desktop\\omnipede\\omnipede.csproj": {
+    "C:\\Users\\Henry\\Desktop\\omnipede\\omnipede.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Henry\\Desktop\\omnipede\\omnipede.csproj",
+        "projectUniqueName": "C:\\Users\\Henry\\Desktop\\omnipede\\omnipede.csproj",
         "projectName": "omnipede",
-        "projectPath": "c:\\Users\\Henry\\Desktop\\omnipede\\omnipede.csproj",
+        "projectPath": "C:\\Users\\Henry\\Desktop\\omnipede\\omnipede.csproj",
         "packagesPath": "C:\\Users\\Henry\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Henry\\Desktop\\omnipede\\obj\\",
+        "outputPath": "C:\\Users\\Henry\\Desktop\\omnipede\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

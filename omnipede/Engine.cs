@@ -6,7 +6,7 @@ namespace omnipede;
 
 public class Engine
 {
-    public static Tuple<Position, int> Normal(Position startingPosition, int depth, int alpha, int beta, bool errorDetection)
+    public static Tuple<Position, int> Normal(Position startingPosition, int depth, int alpha, int beta, bool errorDetection, ref int movesSearched)
     {
         List<Position> testPositionList;
         Position bestPosition;
@@ -32,11 +32,17 @@ public class Engine
             bestPositionValue = -2147483648;
             for (int i = 0; i < testPositionList.Count; i++)
             {
+                movesSearched++;
+                if (movesSearched % 1000 == 0)
+                {
+                    Console.WriteLine("     Moves Searched: "+movesSearched);
+                }
+
                 testPosition = testPositionList[i];
 
                 if (PositionEvaluator.KingsExist(testPosition))
                 {
-                  testPositionValue = Engine.Normal(testPosition, depth-1, alpha, beta, errorDetection).Item2;
+                  testPositionValue = Engine.Normal(testPosition, depth-1, alpha, beta, errorDetection, ref movesSearched).Item2;
                 }
                 else
                 {
@@ -62,11 +68,17 @@ public class Engine
             bestPositionValue = 2147483647;
             for (int i = 0; i < testPositionList.Count; i++)
             {
+                movesSearched++;
+                if (movesSearched % 1000 == 0)
+                {
+                    Console.WriteLine("     Moves Searched: "+movesSearched);
+                }
+
                 testPosition = testPositionList[i];
 
                 if (PositionEvaluator.KingsExist(testPosition))
                 {
-                  testPositionValue = Engine.Normal(testPosition, depth-1, alpha, beta, errorDetection).Item2;
+                  testPositionValue = Engine.Normal(testPosition, depth-1, alpha, beta, errorDetection, ref movesSearched).Item2;
                 }
                 else
                 {

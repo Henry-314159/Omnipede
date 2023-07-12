@@ -1,0 +1,754 @@
+{
+    "startingPosition": {
+      "5,1": "kingsW",
+      "5,8": "kingsB",
+      "4,1": "queensW",
+      "4,8": "queensB",
+      "2,1": "knightsW",
+      "7,1": "knightsW",
+      "2,8": "knightsB",
+      "7,8": "knightsB",
+      "3,1": "bishopsW",
+      "6,1": "bishopsW",
+      "3,8": "bishopsB",
+      "6,8": "bishopsB",
+      "1,1": "rooksW",
+      "8,1": "rooksW",
+      "1,8": "rooksB",
+      "8,8": "rooksB",
+      "1,2": "pawnsW",
+      "2,2": "pawnsW",
+      "3,2": "pawnsW",
+      "4,2": "pawnsW",
+      "5,2": "pawnsW",
+      "6,2": "pawnsW",
+      "7,2": "pawnsW",
+      "8,2": "pawnsW",
+      "1,7": "pawnsB",
+      "2,7": "pawnsB",
+      "3,7": "pawnsB",
+      "4,7": "pawnsB",
+      "5,7": "pawnsB",
+      "6,7": "pawnsB",
+      "7,7": "pawnsB",
+      "8,7": "pawnsB"
+    },
+    "patterns": [],
+    "promotionRanks": [
+      1,
+      8
+    ],
+    "moves": [
+      [
+        {
+          "type": "pawnsW",
+          "startCoords": [
+            5,
+            2
+          ],
+          "endCoords": [
+            5,
+            4
+          ]
+        },
+        {
+          "type": "pawnsB",
+          "startCoords": [
+            5,
+            7
+          ],
+          "endCoords": [
+            5,
+            5
+          ]
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            4,
+            1
+          ],
+          "endCoords": [
+            8,
+            5
+          ]
+        },
+        {
+          "type": "queensB",
+          "startCoords": [
+            4,
+            8
+          ],
+          "endCoords": [
+            10,
+            2
+          ]
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            8,
+            5
+          ],
+          "endCoords": [
+            8,
+            7
+          ],
+          "captured": "pawnsB"
+        },
+        {
+          "type": "queensB",
+          "startCoords": [
+            10,
+            2
+          ],
+          "endCoords": [
+            8,
+            2
+          ],
+          "captured": "pawnsW"
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            8,
+            7
+          ],
+          "endCoords": [
+            7,
+            7
+          ],
+          "captured": "pawnsB"
+        },
+        {
+          "type": "queensB",
+          "startCoords": [
+            8,
+            2
+          ],
+          "endCoords": [
+            7,
+            2
+          ],
+          "captured": "pawnsW"
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            7,
+            7
+          ],
+          "endCoords": [
+            5,
+            5
+          ],
+          "captured": "pawnsB"
+        },
+        {
+          "type": "kingsB",
+          "startCoords": [
+            5,
+            8
+          ],
+          "endCoords": [
+            6,
+            9
+          ]
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            5,
+            5
+          ],
+          "endCoords": [
+            3,
+            7
+          ],
+          "captured": "pawnsB"
+        },
+        {
+          "type": "queensB",
+          "startCoords": [
+            7,
+            2
+          ],
+          "endCoords": [
+            5,
+            4
+          ],
+          "captured": "pawnsW"
+        }
+      ],
+      [
+        {
+          "type": "kingsW",
+          "startCoords": [
+            5,
+            1
+          ],
+          "endCoords": [
+            6,
+            0
+          ]
+        },
+        {
+          "type": "queensB",
+          "startCoords": [
+            5,
+            4
+          ],
+          "endCoords": [
+            3,
+            2
+          ],
+          "captured": "pawnsW"
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            3,
+            7
+          ],
+          "endCoords": [
+            2,
+            7
+          ],
+          "captured": "pawnsB"
+        },
+        {
+          "type": "queensB",
+          "startCoords": [
+            3,
+            2
+          ],
+          "endCoords": [
+            2,
+            2
+          ],
+          "captured": "pawnsW"
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            2,
+            7
+          ],
+          "endCoords": [
+            1,
+            7
+          ],
+          "captured": "pawnsB"
+        },
+        {
+          "type": "queensB",
+          "startCoords": [
+            2,
+            2
+          ],
+          "endCoords": [
+            1,
+            2
+          ],
+          "captured": "pawnsW"
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            1,
+            7
+          ],
+          "endCoords": [
+            4,
+            7
+          ],
+          "captured": "pawnsB"
+        },
+        {
+          "type": "kingsB",
+          "startCoords": [
+            6,
+            9
+          ],
+          "endCoords": [
+            7,
+            9
+          ]
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            4,
+            7
+          ],
+          "endCoords": [
+            6,
+            7
+          ],
+          "captured": "pawnsB"
+        },
+        {
+          "type": "queensB",
+          "startCoords": [
+            1,
+            2
+          ],
+          "endCoords": [
+            4,
+            2
+          ],
+          "captured": "pawnsW"
+        }
+      ],
+      [
+        {
+          "type": "kingsW",
+          "startCoords": [
+            6,
+            0
+          ],
+          "endCoords": [
+            7,
+            0
+          ]
+        },
+        {
+          "type": "queensB",
+          "startCoords": [
+            4,
+            2
+          ],
+          "endCoords": [
+            6,
+            2
+          ],
+          "captured": "pawnsW"
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            6,
+            7
+          ],
+          "endCoords": [
+            5,
+            8
+          ]
+        },
+        {
+          "type": "queensB",
+          "startCoords": [
+            6,
+            2
+          ],
+          "endCoords": [
+            5,
+            1
+          ]
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            5,
+            8
+          ],
+          "endCoords": [
+            3,
+            8
+          ],
+          "captured": "bishopsB"
+        },
+        {
+          "type": "queensB",
+          "startCoords": [
+            5,
+            1
+          ],
+          "endCoords": [
+            3,
+            1
+          ],
+          "captured": "bishopsW"
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            3,
+            8
+          ],
+          "endCoords": [
+            2,
+            8
+          ],
+          "captured": "knightsB"
+        },
+        {
+          "type": "queensB",
+          "startCoords": [
+            3,
+            1
+          ],
+          "endCoords": [
+            2,
+            1
+          ],
+          "captured": "knightsW"
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            2,
+            8
+          ],
+          "endCoords": [
+            1,
+            8
+          ],
+          "captured": "rooksB"
+        },
+        {
+          "type": "queensB",
+          "startCoords": [
+            2,
+            1
+          ],
+          "endCoords": [
+            1,
+            1
+          ],
+          "captured": "rooksW"
+        }
+      ],
+      [
+        {
+          "type": "knightsW",
+          "startCoords": [
+            7,
+            1
+          ],
+          "endCoords": [
+            9,
+            2
+          ]
+        },
+        {
+          "type": "knightsB",
+          "startCoords": [
+            7,
+            8
+          ],
+          "endCoords": [
+            8,
+            6
+          ]
+        }
+      ],
+      [
+        {
+          "type": "knightsW",
+          "startCoords": [
+            9,
+            2
+          ],
+          "endCoords": [
+            7,
+            3
+          ]
+        },
+        {
+          "type": "knightsB",
+          "startCoords": [
+            8,
+            6
+          ],
+          "endCoords": [
+            9,
+            4
+          ]
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            1,
+            8
+          ],
+          "endCoords": [
+            7,
+            2
+          ]
+        },
+        {
+          "type": "bishopsB",
+          "startCoords": [
+            6,
+            8
+          ],
+          "endCoords": [
+            4,
+            6
+          ]
+        }
+      ],
+      [
+        {
+          "type": "rooksW",
+          "startCoords": [
+            8,
+            1
+          ],
+          "endCoords": [
+            8,
+            3
+          ]
+        },
+        {
+          "type": "kingsB",
+          "startCoords": [
+            7,
+            9
+          ],
+          "endCoords": [
+            7,
+            8
+          ]
+        }
+      ],
+      [
+        {
+          "type": "kingsW",
+          "startCoords": [
+            7,
+            0
+          ],
+          "endCoords": [
+            7,
+            1
+          ]
+        },
+        {
+          "type": "rooksB",
+          "startCoords": [
+            8,
+            8
+          ],
+          "endCoords": [
+            8,
+            3
+          ],
+          "captured": "rooksW"
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            7,
+            2
+          ],
+          "endCoords": [
+            8,
+            3
+          ],
+          "captured": "rooksB"
+        },
+        {
+          "type": "queensB",
+          "startCoords": [
+            1,
+            1
+          ],
+          "endCoords": [
+            1,
+            2
+          ]
+        }
+      ],
+      [
+        {
+          "type": "bishopsW",
+          "startCoords": [
+            6,
+            1
+          ],
+          "endCoords": [
+            3,
+            4
+          ]
+        },
+        {
+          "type": "queensB",
+          "startCoords": [
+            1,
+            2
+          ],
+          "endCoords": [
+            3,
+            4
+          ],
+          "captured": "bishopsW"
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            8,
+            3
+          ],
+          "endCoords": [
+            5,
+            6
+          ]
+        },
+        {
+          "type": "kingsB",
+          "startCoords": [
+            7,
+            8
+          ],
+          "endCoords": [
+            7,
+            7
+          ]
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            5,
+            6
+          ],
+          "endCoords": [
+            4,
+            6
+          ],
+          "captured": "bishopsB"
+        },
+        {
+          "type": "kingsB",
+          "startCoords": [
+            7,
+            7
+          ],
+          "endCoords": [
+            8,
+            7
+          ]
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            4,
+            6
+          ],
+          "endCoords": [
+            4,
+            0
+          ]
+        },
+        {
+          "type": "queensB",
+          "startCoords": [
+            3,
+            4
+          ],
+          "endCoords": [
+            7,
+            4
+          ]
+        }
+      ],
+      [
+        {
+          "type": "kingsW",
+          "startCoords": [
+            7,
+            1
+          ],
+          "endCoords": [
+            6,
+            2
+          ]
+        },
+        {
+          "type": "queensB",
+          "startCoords": [
+            7,
+            4
+          ],
+          "endCoords": [
+            9,
+            2
+          ]
+        }
+      ],
+      [
+        {
+          "type": "kingsW",
+          "startCoords": [
+            6,
+            2
+          ],
+          "endCoords": [
+            6,
+            3
+          ]
+        },
+        {
+          "type": "queensB",
+          "startCoords": [
+            9,
+            2
+          ],
+          "endCoords": [
+            10,
+            2
+          ]
+        }
+      ],
+      [
+        {
+          "type": "queensW",
+          "startCoords": [
+            4,
+            0
+          ],
+          "endCoords": [
+            6,
+            2
+          ]
+        }
+      ]
+    ]
+  }

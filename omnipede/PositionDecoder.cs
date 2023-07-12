@@ -1,4 +1,6 @@
 namespace omnipede;
+
+using System.Diagnostics;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 
@@ -101,13 +103,24 @@ public class Position{
             whitesTurn = !whitesTurn;
             for (int j = 0; j < pieces.Count; j++)
             {
+                //Console.WriteLine(JsonSerializer.Serialize(plys[i].startCoords, new JsonSerializerOptions { WriteIndented = true }));
+                //Console.WriteLine(j);
+                //Console.WriteLine(pieces.Count);
                 if (plys[i].endCoords[0] == pieces[j].xCoord & plys[i].endCoords[1] + plys[i].enPassentOffset == pieces[j].yCoord)
                 {
                     pieces.RemoveAt(j);
+                    if (j == pieces.Count)
+                    {
+                        j-= 1;
+                    }
                 }
+                //Console.WriteLine(j);
+                //Console.WriteLine(pieces.Count);
+                //Console.WriteLine(JsonSerializer.Serialize(pieces[j], new JsonSerializerOptions { WriteIndented = true }));
                 if (plys[i].startCoords[0] == pieces[j].xCoord & plys[i].startCoords[1] == pieces[j].yCoord)
                 {
                     pieces.RemoveAt(j);
+                    //j--;
                     if (plys[i].promotionPiece == null)
                     {
                         pieces.Insert(0, new Piece(plys[i].endCoords[0], plys[i].endCoords[1], plys[i].type, true));
