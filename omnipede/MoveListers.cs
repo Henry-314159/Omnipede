@@ -15,6 +15,8 @@ public class MoveLister{
             positionBackup = position.Clone();
         }
 
+        
+
         if (position.whitesTurn){
             for (int i = 0; i < position.pieces.Count; i++)
             {

@@ -6,11 +6,6 @@ using System.Text.RegularExpressions;
 
 partial class PositionDecoder
 {
-    public static int Test(int x)
-    {
-        x += 10;
-        return x;
-    }
     public static Position DecodePosition(string filePath)
     {
         string json = File.ReadAllText(filePath);

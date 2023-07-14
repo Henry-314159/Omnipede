@@ -12,92 +12,23 @@ class Program
     static void Main(string[] args)
     {
         var watchGlobal = System.Diagnostics.Stopwatch.StartNew();
-        Dictionary<string, string>? config;
-        try
-        {
-            config = JsonSerializer.Deserialize<Dictionary<string, string>>(File.ReadAllText(@".\omnipede-config.json"));
-        }
-        catch(JsonException)
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("JsonException When Loading Config, Remaking Config File");
 
-            config = new(){};
-            File.WriteAllText(@".\omnipede-config.json", JsonSerializer.Serialize<Dictionary<string, string>>(config));          
-        }
-        catch(FileNotFoundException)
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("FileNotFoundException When Loading Config, Creating Config File");
+        int depth = 0;
+        int lineLength = 0;
+        int movesSearchedFrequency = 0;
+        string filePath = @".\omnipede-input.json";
+        bool errorDetection = true;
 
-            config = new(){};
-            using (var configFile = File.Create(@".\omnipede-config.json")){}
-            File.WriteAllText(@".\omnipede-config.json", JsonSerializer.Serialize<Dictionary<string, string>>(config)); 
-        }
-        int depth;
-        string filePath;
-        bool errorDetection;
-        config ??= new();
-
-        ConfigTry:
-        try
-        {
-            try
-            {
-                depth = int.Parse(config["depth"]);
-            }
-            catch (FormatException)
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("FormatException When Loading Depth Config, Reseting Depth Config");
-
-                config["depth"] = "2";
-                File.WriteAllText(@".\omnipede-config.json", JsonSerializer.Serialize<Dictionary<string, string>>(config));
-
-                goto ConfigTry;
-            }
-            try
-            {
-                errorDetection = bool.Parse(config["errorDetection"]);
-            }
-            catch (FormatException)
-            {
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("FormatException When Loading Config, Reseting Depth Config");
-
-                config["errorDetection"] = "true";
-                File.WriteAllText(@".\omnipede-config.json", JsonSerializer.Serialize<Dictionary<string, string>>(config));
-
-                goto ConfigTry;
-            }
-            
-            
-            filePath = (string)config["filePath"];
-        }
-        catch (KeyNotFoundException)
-        {
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("KeyNotFoundException When Loading Config, Adding Missing Keys");
-
-            if (!config.ContainsKey("depth")) {config.Add("depth", "2"); }
-            if (!config.ContainsKey("filePath")) {config.Add("filePath", @".\omnipede-input.json");}
-            if (!config.ContainsKey("errorDetection")) {config.Add("errorDetection", "true"); }
-
-            File.WriteAllText(@".\omnipede-config.json", JsonSerializer.Serialize<Dictionary<string, string>>(config));
-
-            goto ConfigTry;
-        }
-        
-        
-
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Config Loaded:");
-        Console.WriteLine("     Depth: "+depth);
-        Console.WriteLine("     File Path: "+filePath);
-        Console.WriteLine("     Error Detection: "+errorDetection);
+        Dictionary<string, string> config = Config.LoadConfig(ref depth, ref filePath, ref errorDetection, ref lineLength, ref movesSearchedFrequency);
 
         Position position;
 
+
+        GameStateNaviary stateNaviary = JsonSerializer.Deserialize<GameStateNaviary>(File.ReadAllText(filePath))!;
+
+
+        Console.WriteLine(stateNaviary);
+        Console.WriteLine(JsonSerializer.Serialize(stateNaviary));
 
         try
         {
@@ -121,24 +52,36 @@ class Program
         
         Console.ForegroundColor = ConsoleColor.White;
         Console.WriteLine("Position Decoded");
-        Console.WriteLine("Starting Search For \"Best\" Move:");
-
-        int movesSearched = 0;
-        Tuple<Position, int> outputTuple = Engine.Normal(position, depth, -2147483648, 2147483647, errorDetection, ref movesSearched);
-
-
-        Position goodPosition = outputTuple.Item1;
-
-        Console.ForegroundColor = ConsoleColor.White;
-        
-        Console.WriteLine("     Total Moves Searched: "+movesSearched);
-        Console.WriteLine("Move Found:");
-        Console.WriteLine("     Position Value: "+outputTuple.Item2);
+        Console.WriteLine("Starting Search For \"Best\" Moves:");
         
 
-        
+        for (int i = 0; i < lineLength; i++)
+        {
+            int movesSearched = 0;
 
-        PrintPositionDifrences(position, goodPosition);
+            if (movesSearchedFrequency != -1)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.WriteLine("     Starting Search For \"Best\" Move:");
+            }
+
+            Tuple<Position, int> outputTuple = Engine.Normal(position, depth, -2147483648, 2147483647, errorDetection, ref movesSearched, ref movesSearchedFrequency);
+
+            Position goodPosition = outputTuple.Item1;
+
+
+            if (movesSearchedFrequency != -1)
+            {
+            Console.WriteLine("         Total Moves Searched: "+movesSearched);
+            } 
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine("     Move Found:");
+            Console.WriteLine("         Position Value: "+outputTuple.Item2);
+
+            PrintPositionDifrences(position, goodPosition);
+
+            position = goodPosition.Clone();
+        }
 
         watchGlobal.Stop();
 
@@ -162,7 +105,7 @@ class Program
             }
             if (difrent)
             {
-                Console.WriteLine("     Add: "+JsonSerializer.Serialize(goodPosition.pieces[i]));
+                Console.WriteLine("         Add: "+JsonSerializer.Serialize(goodPosition.pieces[i]));
             }
         }
 
@@ -179,7 +122,7 @@ class Program
             }
             if (difrent)
             {
-                Console.WriteLine("     Remove: "+JsonSerializer.Serialize(position.pieces[i]));
+                Console.WriteLine("         Remove: "+JsonSerializer.Serialize(position.pieces[i]));
             }
         }
     }

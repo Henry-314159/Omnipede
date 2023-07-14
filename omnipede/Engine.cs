@@ -6,7 +6,7 @@ namespace omnipede;
 
 public class Engine
 {
-    public static Tuple<Position, int> Normal(Position startingPosition, int depth, int alpha, int beta, bool errorDetection, ref int movesSearched)
+    public static Tuple<Position, int> Normal(Position startingPosition, int depth, int alpha, int beta, bool errorDetection, ref int movesSearched, ref int movesSearchedFrequency)
     {
         List<Position> testPositionList;
         Position bestPosition;
@@ -21,8 +21,6 @@ public class Engine
             return new Tuple<Position, int>(startingPosition, PositionEvaluator.PointBased(startingPosition));
         }
 
-            //Console.WriteLine("Depth: "+depth);
-
         testPositionList = MoveLister.ListMoves(startingPosition, errorDetection);
         bestPosition = testPositionList[0];
   
@@ -31,18 +29,22 @@ public class Engine
         {
             bestPositionValue = -2147483648;
             for (int i = 0; i < testPositionList.Count; i++)
-            {
-                movesSearched++;
-                if (movesSearched % 1000 == 0)
+            {   
+                if (movesSearchedFrequency > -1)
                 {
-                    Console.WriteLine("     Moves Searched: "+movesSearched);
+                    if (movesSearchedFrequency != 0 && movesSearched % movesSearchedFrequency == 0)
+                    {
+                        Console.WriteLine("         Moves Searched: "+movesSearched);
+                    }
+                    movesSearched++;
                 }
+                
 
                 testPosition = testPositionList[i];
 
                 if (PositionEvaluator.KingsExist(testPosition))
                 {
-                  testPositionValue = Engine.Normal(testPosition, depth-1, alpha, beta, errorDetection, ref movesSearched).Item2;
+                  testPositionValue = Engine.Normal(testPosition, depth-1, alpha, beta, errorDetection, ref movesSearched, ref movesSearchedFrequency).Item2;
                 }
                 else
                 {
@@ -67,18 +69,21 @@ public class Engine
         {
             bestPositionValue = 2147483647;
             for (int i = 0; i < testPositionList.Count; i++)
-            {
-                movesSearched++;
-                if (movesSearched % 1000 == 0)
+            { 
+                if (movesSearchedFrequency > -1)
                 {
-                    Console.WriteLine("     Moves Searched: "+movesSearched);
+                    if (movesSearchedFrequency != 0 && movesSearched % movesSearchedFrequency == 0)
+                    {
+                        Console.WriteLine("         Moves Searched: "+movesSearched);
+                    }
+                    movesSearched++;
                 }
 
                 testPosition = testPositionList[i];
 
                 if (PositionEvaluator.KingsExist(testPosition))
                 {
-                  testPositionValue = Engine.Normal(testPosition, depth-1, alpha, beta, errorDetection, ref movesSearched).Item2;
+                  testPositionValue = Engine.Normal(testPosition, depth-1, alpha, beta, errorDetection, ref movesSearched, ref movesSearchedFrequency).Item2;
                 }
                 else
                 {
