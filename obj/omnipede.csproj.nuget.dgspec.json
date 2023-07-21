@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Henry\\Desktop\\omnipede\\omnipede.csproj": {}
+    "C:\\Users\\Henry\\Desktop\\Omni-Omnipede\\omnipede indev\\omnipede.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Henry\\Desktop\\omnipede\\omnipede.csproj": {
+    "C:\\Users\\Henry\\Desktop\\Omni-Omnipede\\omnipede indev\\omnipede.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Henry\\Desktop\\omnipede\\omnipede.csproj",
+        "projectUniqueName": "C:\\Users\\Henry\\Desktop\\Omni-Omnipede\\omnipede indev\\omnipede.csproj",
         "projectName": "omnipede",
-        "projectPath": "C:\\Users\\Henry\\Desktop\\omnipede\\omnipede.csproj",
+        "projectPath": "C:\\Users\\Henry\\Desktop\\Omni-Omnipede\\omnipede indev\\omnipede.csproj",
         "packagesPath": "C:\\Users\\Henry\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Henry\\Desktop\\omnipede\\obj\\",
+        "outputPath": "C:\\Users\\Henry\\Desktop\\Omni-Omnipede\\omnipede indev\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -51,12 +51,31 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.win-x64",
+              "version": "[7.0.7, 7.0.7]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.win-x64",
+              "version": "[7.0.7, 7.0.7]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Runtime.win-x64",
+              "version": "[7.0.7, 7.0.7]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x64": {
+          "#import": []
         }
       }
     }

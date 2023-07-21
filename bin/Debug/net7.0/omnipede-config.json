@@ -1,1 +1,1 @@
-{"depth":"2","lineLength":"1","movesSearchedFrequency":"1000","filePath":".\\omnipede-input.json","errorDetection":"false"}
+{"maxDepth":3,"maxTimeMiliseconds":15000}

@@ -6,117 +6,83 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+
+    
 
 class Program
 {
+    public static Dictionary<string, int> transpositionTab = new();
+    
+
     static void Main(string[] args)
     {
-        var watchGlobal = System.Diagnostics.Stopwatch.StartNew();
+            var watchGlobal = System.Diagnostics.Stopwatch.StartNew();
 
-        int depth = 0;
-        int lineLength = 0;
-        int movesSearchedFrequency = 0;
-        string filePath = @".\omnipede-input.json";
-        bool errorDetection = true;
+            var watchConfig = System.Diagnostics.Stopwatch.StartNew();
 
-        Dictionary<string, string> config = Config.LoadConfig(ref depth, ref filePath, ref errorDetection, ref lineLength, ref movesSearchedFrequency);
+        int maxDepth = 2;
+        int maxTimeMiliseconds = 10;
 
-        Position position;
+        Config.LoadConfig(ref maxDepth, ref maxTimeMiliseconds);
 
-        try
+            watchConfig.Stop();
+
+            var watchDecode = System.Diagnostics.Stopwatch.StartNew();
+
+        if (!File.Exists(@".\omnipede-input.json"))
         {
-            position = PositionDecoder.DecodePosition(filePath);
-        }
-        catch(FileNotFoundException)
-        {
-            Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine("FileNotFoundException When Loading Position, Reseting File Path Config and Creating Input File");
-            config["filePath"] = @".\omnipede-input.json";
-            using (var inputFile = File.Create(config["filePath"])){}
-            File.WriteAllText(@".\omnipede-config.json", JsonSerializer.Serialize<Dictionary<string, string>>(config));
-            Console.WriteLine("Paste Game Data Into omnipede-input.json Then Try Again");
-            Console.WriteLine("Press Any Key to Close The Program");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Input file not found:");
+            Console.WriteLine("    Creating input file");
+            File.Create(@".\omnipede-input.json");
+            Console.WriteLine("    Paste game into input file and try again");
             Console.ReadKey();
-
-            Environment.Exit(0);
-            position = PositionDecoder.DecodePosition(filePath);
         }
+        GameStateNaviary gameStateNaviary = JsonSerializer.Deserialize<GameStateNaviary>(File.ReadAllText(@".\omnipede-input.json"))!;
+        GameState gameState = gameStateNaviary.ToGameState();
+
+            watchDecode.Stop();
+
+            var watchEngine = System.Diagnostics.Stopwatch.StartNew();
+
+        //int currentDepth = MaxDepth;
+
+        //Console.WriteLine(gameState.DebugString());
 
         
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Position Decoded");
-        Console.WriteLine("Starting Search For \"Best\" Moves:");
+        Tuple<Ply?, int> output = new Tuple<Ply?, int>(new(), 0);
+
+        for (int currentDepth = 1; currentDepth <= maxDepth; currentDepth++)
+        {
+            int depth = currentDepth;
+            output = Engine.Normal(ref maxTimeMiliseconds, ref watchGlobal, ref gameState, currentDepth, -2147483648, 2147483647, false);
+
+            if (output.Item1 != null)
+            {
+                Console.WriteLine(output.Item1.DebugString());
+                Console.WriteLine("Ply Value: "+output.Item2);
+                Console.WriteLine("Depth: "+currentDepth);
+            }
+            else
+            {
+                Console.WriteLine($"Depth {currentDepth} search stoped before completion");
+            }
+        }
+
+            watchEngine.Stop();
+
+            watchGlobal.Stop();
         
+        Console.WriteLine(watchConfig.Elapsed+" - Config Loading Time");
+        Console.WriteLine(watchDecode.Elapsed+" - Game State Decoding Time");
+        Console.WriteLine(watchEngine.Elapsed+" - Search Time");
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine(watchGlobal.Elapsed+" - Total Run Time");
+        Console.ReadKey();
 
-        for (int i = 0; i < lineLength; i++)
-        {
-            int movesSearched = 0;
-
-            if (movesSearchedFrequency != -1)
-            {
-                Console.ForegroundColor = ConsoleColor.DarkGray;
-                Console.WriteLine("     Starting Search For \"Best\" Move:");
-            }
-
-            Tuple<Position, int> outputTuple = Engine.Normal(position, depth, -2147483648, 2147483647, errorDetection, ref movesSearched, ref movesSearchedFrequency);
-
-            Position goodPosition = outputTuple.Item1;
-
-
-            if (movesSearchedFrequency != -1)
-            {
-            Console.WriteLine("         Total Moves Searched: "+movesSearched);
-            } 
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("     Move Found:");
-            Console.WriteLine("         Position Value: "+outputTuple.Item2);
-
-            PrintPositionDifrences(position, goodPosition);
-
-            position = goodPosition.Clone();
-        }
-
-        watchGlobal.Stop();
-
-        Console.ForegroundColor = ConsoleColor.White;
-        Console.WriteLine("Total Run Time: "+watchGlobal.Elapsed);
-        Console.Read();
+        
     }
 
-    static void PrintPositionDifrences(Position position, Position goodPosition)
-    {
-        bool difrent;
-        for (int i = 0; i < goodPosition.pieces.Count; i++)
-        {
-            difrent = true;
-            for (int j = 0; j < position.pieces.Count; j++)
-            {
-                if (JsonSerializer.Serialize(goodPosition.pieces[i]) == JsonSerializer.Serialize(position.pieces[j]))
-                {
-                    difrent = false;
-                }
-            }
-            if (difrent)
-            {
-                Console.WriteLine("         Add: "+JsonSerializer.Serialize(goodPosition.pieces[i]));
-            }
-        }
-
-
-        for (int i = 0; i < position.pieces.Count; i++)
-        {
-            difrent = true;
-            for (int j = 0; j < goodPosition.pieces.Count; j++)
-            {
-                if (JsonSerializer.Serialize(position.pieces[i]) == JsonSerializer.Serialize(goodPosition.pieces[j]))
-                {
-                    difrent = false;
-                }
-            }
-            if (difrent)
-            {
-                Console.WriteLine("         Remove: "+JsonSerializer.Serialize(position.pieces[i]));
-            }
-        }
-    }
 }

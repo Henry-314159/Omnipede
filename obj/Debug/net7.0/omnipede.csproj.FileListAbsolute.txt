@@ -1,15 +1,15 @@
-C:\Users\Henry\Desktop\omnipede\bin\Debug\net7.0\omnipede.exe
-c:\Users\Henry\Desktop\omnipede\bin\Debug\net7.0\omnipede.deps.json
-c:\Users\Henry\Desktop\omnipede\bin\Debug\net7.0\omnipede.runtimeconfig.json
-C:\Users\Henry\Desktop\omnipede\bin\Debug\net7.0\omnipede.dll
-C:\Users\Henry\Desktop\omnipede\bin\Debug\net7.0\omnipede.pdb
-C:\Users\Henry\Desktop\omnipede\obj\Debug\net7.0\omnipede.csproj.AssemblyReference.cache
-C:\Users\Henry\Desktop\omnipede\obj\Debug\net7.0\omnipede.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Henry\Desktop\omnipede\obj\Debug\net7.0\omnipede.AssemblyInfoInputs.cache
-C:\Users\Henry\Desktop\omnipede\obj\Debug\net7.0\omnipede.AssemblyInfo.cs
-C:\Users\Henry\Desktop\omnipede\obj\Debug\net7.0\omnipede.csproj.CoreCompileInputs.cache
-C:\Users\Henry\Desktop\omnipede\obj\Debug\net7.0\omnipede.dll
-C:\Users\Henry\Desktop\omnipede\obj\Debug\net7.0\refint\omnipede.dll
-C:\Users\Henry\Desktop\omnipede\obj\Debug\net7.0\omnipede.pdb
-c:\Users\Henry\Desktop\omnipede\obj\Debug\net7.0\omnipede.genruntimeconfig.cache
-c:\Users\Henry\Desktop\omnipede\obj\Debug\net7.0\ref\omnipede.dll
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\bin\Debug\net7.0\omnipede.exe
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\bin\Debug\net7.0\omnipede.deps.json
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\bin\Debug\net7.0\omnipede.runtimeconfig.json
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\bin\Debug\net7.0\omnipede.dll
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\bin\Debug\net7.0\omnipede.pdb
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\obj\Debug\net7.0\omnipede.csproj.AssemblyReference.cache
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\obj\Debug\net7.0\omnipede.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\obj\Debug\net7.0\omnipede.AssemblyInfoInputs.cache
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\obj\Debug\net7.0\omnipede.AssemblyInfo.cs
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\obj\Debug\net7.0\omnipede.csproj.CoreCompileInputs.cache
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\obj\Debug\net7.0\omnipede.dll
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\obj\Debug\net7.0\refint\omnipede.dll
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\obj\Debug\net7.0\omnipede.pdb
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\obj\Debug\net7.0\omnipede.genruntimeconfig.cache
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\obj\Debug\net7.0\ref\omnipede.dll

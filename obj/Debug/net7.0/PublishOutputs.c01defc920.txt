@@ -1,0 +1,5 @@
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\bin\Debug\net7.0\publish\omnipede.exe
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\bin\Debug\net7.0\publish\omnipede.dll
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\bin\Debug\net7.0\publish\omnipede.deps.json
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\bin\Debug\net7.0\publish\omnipede.runtimeconfig.json
+C:\Users\Henry\Desktop\Omni-Omnipede\omnipede indev\bin\Debug\net7.0\publish\omnipede.pdb

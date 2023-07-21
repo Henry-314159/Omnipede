@@ -6,105 +6,113 @@ namespace omnipede;
 
 public class Engine
 {
-    public static Tuple<Position, int> Normal(Position startingPosition, int depth, int alpha, int beta, bool errorDetection, ref int movesSearched, ref int movesSearchedFrequency)
+    public static Tuple<Ply?, int> Normal(ref int maxTime, ref System.Diagnostics.Stopwatch totalTime, ref GameState gameState, int depth, int alpha, int beta, bool debug)
     {
-        List<Position> testPositionList;
-        Position bestPosition;
-        int bestPositionValue;
-        Position testPosition;
-        int testPositionValue;
-
-        
+        List<Ply> testPlyList;
+        List<Ply> principleVariation = new();
+        Ply bestPly;
+        int bestPlyValue;
+        Ply testPly;
+        int testPlyValue;
 
         if (depth == 0)
         {
-            return new Tuple<Position, int>(startingPosition, PositionEvaluator.PointBased(startingPosition));
+            return new(null, GameState.Evaluate(gameState));
         }
 
-        testPositionList = MoveLister.ListMoves(startingPosition, errorDetection);
-        bestPosition = testPositionList[0];
-  
+
+        testPlyList = ListPlies.PseudoLegal(gameState);
+
+        bestPly = testPlyList[0];
+
+        //Console.WriteLine(gameState.currentTurn);
         
-        if (startingPosition.whitesTurn)
+        if (gameState.currentTurn == Piece.Color.White)
         {
-            bestPositionValue = -2147483648;
-            for (int i = 0; i < testPositionList.Count; i++)
-            {   
-                if (movesSearchedFrequency > -1)
+            bestPlyValue = -2147483648;
+            for (int i = 0; i < testPlyList.Count; i++)
+            {
+                if (totalTime.ElapsedMilliseconds > maxTime)
                 {
-                    if (movesSearchedFrequency != 0 && movesSearched % movesSearchedFrequency == 0)
-                    {
-                        Console.WriteLine("         Moves Searched: "+movesSearched);
-                    }
-                    movesSearched++;
+                    return new(null, GameState.Evaluate(gameState));
                 }
-                
 
-                testPosition = testPositionList[i];
+                testPly = testPlyList[i];
 
-                if (PositionEvaluator.KingsExist(testPosition))
+                Tuple<Ply?, int> testTuple = new(new(), 0);
+
+                gameState = Ply.DoPly(gameState, testPly);
+
+                if (testPly.piecesToRemove.Count > 0 && (testPly.piecesToRemove[0].Item1.binary & Piece.Type._MASK) == Piece.Type.King)
                 {
-                  testPositionValue = Engine.Normal(testPosition, depth-1, alpha, beta, errorDetection, ref movesSearched, ref movesSearchedFrequency).Item2;
+                    testPlyValue = 2147483647;
                 }
                 else
                 {
-                    testPositionValue = PositionEvaluator.PointBased(testPosition);
-                }
-                
-                alpha = Math.Max(alpha, testPositionValue);                
-
-                if (testPositionValue >= beta)
-                {
-                    return new Tuple<Position, int>(testPosition, testPositionValue);
+                    testTuple = Engine.Normal(ref maxTime, ref totalTime, ref gameState, depth-1, alpha, beta, debug);
+                    testPlyValue = testTuple.Item2;
                 }
 
-                if (testPositionValue > bestPositionValue)
+                alpha = Math.Max(alpha, testPlyValue);  
+                if (beta <= alpha)
                 {
-                    bestPosition = testPosition;
-                    bestPositionValue = testPositionValue;
+                    gameState = Ply.UndoPly(gameState, testPly);
+                    return new(null, testPlyValue);
                 }
+
+                if (testPlyValue > bestPlyValue)
+                {
+                    bestPly = testPly;
+                    bestPlyValue = testPlyValue;
+                }
+
+                gameState = Ply.UndoPly(gameState, testPly);
             }
         }
         else
         {
-            bestPositionValue = 2147483647;
-            for (int i = 0; i < testPositionList.Count; i++)
-            { 
-                if (movesSearchedFrequency > -1)
+            bestPlyValue = 2147483647;
+            for (int i = 0; i < testPlyList.Count; i++)
+            {
+                if (totalTime.ElapsedMilliseconds > maxTime)
                 {
-                    if (movesSearchedFrequency != 0 && movesSearched % movesSearchedFrequency == 0)
-                    {
-                        Console.WriteLine("         Moves Searched: "+movesSearched);
-                    }
-                    movesSearched++;
+                    return new(null, GameState.Evaluate(gameState));
                 }
 
-                testPosition = testPositionList[i];
+                testPly = testPlyList[i];
 
-                if (PositionEvaluator.KingsExist(testPosition))
+                Tuple<Ply?, int> testTuple = new(new(), 0);
+
+                gameState = Ply.DoPly(gameState, testPly);
+
+                if (testPly.piecesToRemove.Count > 0 && (testPly.piecesToRemove[0].Item1.binary & Piece.Type._MASK) == Piece.Type.King)
                 {
-                  testPositionValue = Engine.Normal(testPosition, depth-1, alpha, beta, errorDetection, ref movesSearched, ref movesSearchedFrequency).Item2;
+                    testPlyValue = -2147483648;
                 }
                 else
                 {
-                    testPositionValue = PositionEvaluator.PointBased(testPosition);
+                    testTuple = Engine.Normal(ref maxTime, ref totalTime, ref gameState, depth-1, alpha, beta, debug);
+                    testPlyValue = testTuple.Item2;
                 }
 
-                beta = Math.Min(beta, testPositionValue);     
-
-                if (testPositionValue <= alpha)
+                beta = Math.Min(beta, testPlyValue); 
+                if (beta <= alpha)
                 {
-                    return new Tuple<Position, int>(testPosition, testPositionValue);
+                    gameState = Ply.UndoPly(gameState, testPly);
+                    return new(null, testPlyValue);
                 }
 
-                if (testPositionValue < bestPositionValue)
+                if (testPlyValue < bestPlyValue)
                 {
-                    bestPosition = testPosition;
-                    bestPositionValue = testPositionValue;
+                    bestPly = testPly;
+                    bestPlyValue = testPlyValue;
                 }
+
+                gameState = Ply.UndoPly(gameState, testPly);
+                
             }
         }
 
-        return new Tuple<Position, int>(bestPosition, bestPositionValue);
+        return new(bestPly, bestPlyValue);
     }
 }

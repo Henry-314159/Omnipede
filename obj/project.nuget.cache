@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "tmEgs1X5yd6JBdhusM4/pNoP1g/rm94U4bJp9pqvlHYAiuR/w/eVtoVjZmtwKt1SlTJnsyKgn/30wDV+WXUMpA==",
+  "dgSpecHash": "pTpUyrf00pq2q0Ce7L4sE+Fz8RSRV4yt+8Ce0UUOGi5MglQYLPl9hDFjz3JFlUecKfXmC+cPEAJ6BULKfwKK5A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Henry\\Desktop\\omnipede\\omnipede.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\Henry\\Desktop\\Omni-Omnipede\\omnipede indev\\omnipede.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Henry\\.nuget\\packages\\microsoft.netcore.app.runtime.win-x64\\7.0.7\\microsoft.netcore.app.runtime.win-x64.7.0.7.nupkg.sha512",
+    "C:\\Users\\Henry\\.nuget\\packages\\microsoft.windowsdesktop.app.runtime.win-x64\\7.0.7\\microsoft.windowsdesktop.app.runtime.win-x64.7.0.7.nupkg.sha512",
+    "C:\\Users\\Henry\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.win-x64\\7.0.7\\microsoft.aspnetcore.app.runtime.win-x64.7.0.7.nupkg.sha512"
+  ],
   "logs": []
 }
